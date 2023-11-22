@@ -1,18 +1,18 @@
 // import React from 'react'
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
-import { set } from "mongoose";
 
 function Signup() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    console.log(formData);
   };
+  
   const SubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -21,7 +21,8 @@ function Signup() {
       const res = await axios.post("/api/auth/signup", formData);
       console.log("SignUp Successfully", res.data);
       setLoading(false);
-      
+      navigate("/signin");
+
     } catch (err) {
       console.log("Signup failed", err.message);
       setLoading(false);
