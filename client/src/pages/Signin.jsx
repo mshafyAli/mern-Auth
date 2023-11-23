@@ -1,39 +1,42 @@
 // import React from 'react'
 import { useState } from "react";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 function Signin() {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  
+
   const SubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      setError(false);
+      dispatch(signInStart());
       const res = await axios.post("/api/auth/signin", formData);
       console.log("SignUp Successfully", res.data);
-      setLoading(false);
+      dispatch(signInSuccess(res));
       navigate("/");
-      
     } catch (err) {
       console.log("Signup failed", err.message);
-      setLoading(false);
-      setError(true);
+      dispatch(signInFailure(err));
+      
     }
   };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
       <form className="flex flex-col gap-4" onSubmit={SubmitHandler}>
-       
         <input
           type="email"
           placeholder="Email"
@@ -48,7 +51,10 @@ function Signin() {
           onChange={handleChange}
           className="bg-slate-100 p-3 rounded-lg"
         />
-        <button disabled={loading}  className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+        <button
+          disabled={loading}
+          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+        >
           {loading ? "Loading..." : "Sign Up"}
         </button>
       </form>
@@ -58,7 +64,7 @@ function Signin() {
           <span className="text-blue-500">Sign Up</span>
         </Link>
       </div>
-      <p className="text-red-700 mt-5">{error && 'Something went Wrong!'}</p>
+      <p className="text-red-700 mt-5">{error ?  'something went wrong' : ""}</p>
     </div>
   );
 }
