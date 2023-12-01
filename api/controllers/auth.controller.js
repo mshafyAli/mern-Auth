@@ -33,8 +33,7 @@ export const signin = async(req, res,next) => {
     res.cookie('token',token,
     {
       httpOnly:true,
-      secure:true,
-      expires: expiryDate
+      expires: expiryDate,
     }).status(200).send(rest);
   
     
@@ -52,7 +51,6 @@ export const google = async(req, res,next) => {
       const expiryDate = new Date(Date.now() + 3600000); // 1 hour
       res.cookie('token',token,{
         httpOnly:true,
-        secure:true,
         expires: expiryDate
       }).status(200).send(rest);
     }else{
@@ -70,7 +68,6 @@ export const google = async(req, res,next) => {
       const expiryDate = new Date(Date.now() + 3600000); // 1 hour
       res.cookie('token',token,{
         httpOnly:true,
-        secure:true,
         expires: expiryDate
       }).status(200).send(rest);
     }

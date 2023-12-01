@@ -22,7 +22,7 @@ function OAuth() {
       });
       // const data = await response.json(data);
       // console.log(data);
-      dispatch(signInSuccess(data))
+      dispatch(signInSuccess(response))
       navigate('/');
       console.log(response);
     }catch (err) {
