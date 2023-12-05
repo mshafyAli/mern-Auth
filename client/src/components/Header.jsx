@@ -6,7 +6,7 @@ const Header = () => {
   const { currentUser } = useSelector((state) => state.user)
   return (
     <div className='bg-slate-200'>
-        <div className='flex justify-between items-center max-w-full p-3 mr-[50px]'>
+        <div className='flex justify-between items-center max-w-6xl p-3 mx-auto'>
             <Link to='/'>
             <h1 className='text-2xl font-bold'>Auth</h1>
             </Link>

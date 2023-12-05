@@ -19,13 +19,22 @@ function Signup() {
     try {
       setLoading(true);
       setError(false);
-      const res = await axios.post("/api/auth/signup", formData);
-      console.log("SignUp Successfully", res.data);
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      console.log(data);
       setLoading(false);
-      navigate("/signin");
-
-    } catch (err) {
-      console.log("Signup failed", err.message);
+      if (data.success === false) {
+        setError(true);
+        return;
+      }
+      navigate('/signin');
+    } catch (error) {
       setLoading(false);
       setError(true);
     }
