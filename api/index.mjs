@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 dotenv.config();
+
 
 
 // DataBase
@@ -25,8 +27,15 @@ dotenv.config();
         process.exit(0);
         
 });
-
+const __dirname = path.resolve();
 const app = express();
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
+
 app.use(express.json());
 app.use(cookieParser());
 
