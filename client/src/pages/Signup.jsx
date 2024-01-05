@@ -1,8 +1,11 @@
 // import React from 'react'
 import { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import OAuth from "../components/OAuth";
+
+import { baseUrl } from "../../../core";
+
 
 function Signup() {
   const [formData, setFormData] = useState({});
@@ -19,7 +22,7 @@ function Signup() {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch(`${baseUrl}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

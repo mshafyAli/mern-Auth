@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import OAuth from "../components/OAuth"
+import { baseUrl } from "../../../core";
 
 function Signin() {
   const [formData, setFormData] = useState({});
@@ -24,7 +25,7 @@ function Signin() {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch('/api/auth/signin', {
+      const res = await fetch(`${baseUrl}/api/auth/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,10 +69,14 @@ function Signin() {
         </button>
         <OAuth />
       </form>
-      <div className="flex gap-2 mt-5">
+      <div className="flex justify-between gap-2 mt-5">
         <p>Dont have an account?</p>
         <Link to="/signup">
-          <span className="text-blue-500">Sign Up</span>
+          <span className="text-blue-500 mr-[135px]">Sign Up</span>
+        </Link>
+        <Link to="/forgetpassword">
+        
+        <span className="text-blue-500">Forget Password</span>
         </Link>
       </div>
       <p className="text-red-700 mt-5">{error ?  'something went wrong' : ""}</p>

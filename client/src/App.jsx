@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import PrivateRoute from "./components/PrivateRoute";
+import ForgetPassword from "./pages/ForgetPassword";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
