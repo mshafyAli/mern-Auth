@@ -4,7 +4,6 @@ import { Link,useNavigate } from "react-router-dom";
 
 import OAuth from "../components/OAuth";
 
-import { baseUrl } from "../../../core";
 
 
 function Signup() {
@@ -22,7 +21,7 @@ function Signup() {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch(`${baseUrl}/api/auth/signup`, {
+      const res = await fetch(`/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

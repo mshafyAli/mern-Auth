@@ -4,7 +4,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 import { app } from "../firebase";
 import { signInSuccess } from "../redux/user/userSlice";
-import { baseUrl } from "../../../core";
+
+
 // import { baseUrl } from "../../../core";
 
 
@@ -19,7 +20,7 @@ function OAuth() {
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
 
-      const res = await fetch(`${baseUrl}/api/auth/google`, {
+      const res = await fetch(`/api/auth/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

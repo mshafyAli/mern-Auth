@@ -9,7 +9,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import OAuth from "../components/OAuth"
-import { baseUrl } from "../../../core";
 
 function Signin() {
   const [formData, setFormData] = useState({});
@@ -25,7 +24,7 @@ function Signin() {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch(`${baseUrl}/api/auth/signin`, {
+      const res = await fetch(`/api/auth/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
